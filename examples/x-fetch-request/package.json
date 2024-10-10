@@ -1,0 +1,23 @@
+{
+  "name": "@xiaohuohumax/example-x-fetch-request",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Example of x-fetch-request usage",
+  "author": {
+    "name": "xiaohuohumax",
+    "url": "https://github.com/xiaohuohumax"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohuohumax/x-fetch.git"
+  },
+  "scripts": {
+    "dev": "vite-node src/index.ts"
+  },
+  "dependencies": {
+    "@xiaohuohumax/x-fetch-request": "workspace:^",
+    "vite-node": "^2.1.2"
+  }
+}

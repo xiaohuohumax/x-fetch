@@ -1,0 +1,52 @@
+{
+  "name": "@xiaohuohumax/x-fetch-plugin-retry",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "x-fetch plugin retry package",
+  "author": {
+    "name": "xiaohuohumax",
+    "url": "https://github.com/xiaohuohumax"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohuohumax/x-fetch.git"
+  },
+  "keywords": [
+    "x-fetch",
+    "retry",
+    "plugin"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": {
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.ts --configPlugin esbuild",
+    "build:watch": "pnpm build --watch"
+  },
+  "dependencies": {
+    "@xiaohuohumax/x-fetch-core": "workspace:^",
+    "@xiaohuohumax/x-fetch-error": "workspace:^",
+    "@xiaohuohumax/x-fetch-request": "workspace:^",
+    "@xiaohuohumax/x-fetch-types": "workspace:^",
+    "promise-retry": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/promise-retry": "^1.1.6",
+    "@types/retry": "^0.12.5"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": false,
+    "removeComments": false,
+    "esModuleInterop": true
+  }
+}

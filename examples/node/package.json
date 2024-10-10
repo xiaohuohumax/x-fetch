@@ -1,0 +1,21 @@
+{
+  "name": "example-node",
+  "type": "commonjs",
+  "version": "1.0.0",
+  "private": true,
+  "author": {
+    "name": "xiaohuohumax",
+    "url": "https://github.com/xiaohuohumax"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohuohumax/x-fetch.git"
+  },
+  "scripts": {
+    "dev": "node src/index.cjs"
+  },
+  "dependencies": {
+    "@xiaohuohumax/x-fetch": "workspace:^"
+  }
+}

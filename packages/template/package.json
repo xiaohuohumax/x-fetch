@@ -1,0 +1,41 @@
+{
+  "name": "@xiaohuohumax/x-fetch-template",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "x-fetch template package",
+  "author": {
+    "name": "xiaohuohumax",
+    "url": "https://github.com/xiaohuohumax"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohuohumax/x-fetch.git"
+  },
+  "keywords": [
+    "x-fetch",
+    "template"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": {
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.ts --configPlugin esbuild",
+    "build:watch": "pnpm build --watch"
+  }
+}

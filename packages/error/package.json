@@ -1,0 +1,43 @@
+{
+  "name": "@xiaohuohumax/x-fetch-error",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "x-fetch error package",
+  "author": {
+    "name": "xiaohuohumax",
+    "url": "https://github.com/xiaohuohumax"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohuohumax/x-fetch.git"
+  },
+  "keywords": [
+    "x-fetch",
+    "error"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": {
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.ts --configPlugin esbuild",
+    "build:watch": "pnpm build --watch"
+  },
+  "dependencies": {
+    "@xiaohuohumax/x-fetch-types": "workspace:^"
+  }
+}

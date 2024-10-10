@@ -1,0 +1,74 @@
+{
+  "name": "x-fetch",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.0.4",
+  "description": "A simple, lightweight HTTP request library based on the fetch API.",
+  "author": {
+    "name": "xiaohuohumax",
+    "url": "https://github.com/xiaohuohumax"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohuohumax/x-fetch.git"
+  },
+  "keywords": [
+    "fetch",
+    "fetch-api",
+    "request",
+    "endpoint",
+    "http request"
+  ],
+  "scripts": {
+    "dev": "pnpm -r --filter=./apps/** --stream run dev",
+    "build": "pnpm -r --filter=./packages/** --stream run build",
+    "build:watch": "pnpm build && pnpm -r --filter=./packages/** --parallel --stream run build:watch",
+    "commit": "git add . && cz",
+    "clear": "rimraf -g **/node_modules **/dist",
+    "postinstall": "simple-git-hooks",
+    "changeset": "changeset",
+    "lint": "eslint .",
+    "lint:debug": "eslint . --debug",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "release": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.7.3",
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^19.2.2",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@rollup/plugin-commonjs": "^27.0.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@types/node": "^22.7.4",
+    "@vitest/coverage-v8": "2.1.2",
+    "clone-deep": "^4.0.1",
+    "commitizen": "^4.3.0",
+    "cz-git": "^1.9.1",
+    "eslint": "^9.11.1",
+    "msw": "^2.4.9",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.22.4",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "simple-git-hooks": "^2.11.1",
+    "undici": "^6.19.8",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vitest": "^2.1.2"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npx commitlint --edit $1",
+    "pre-commit": "pnpm test && pnpm lint:fix && git add ."
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "@xiaohuohumax/x-fetch-request",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "x-fetch request package",
+  "author": {
+    "name": "xiaohuohumax",
+    "url": "https://github.com/xiaohuohumax"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohuohumax/x-fetch.git"
+  },
+  "keywords": [
+    "fetch",
+    "fetch-api",
+    "request",
+    "endpoint",
+    "http request"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": {
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.ts --configPlugin esbuild",
+    "build:watch": "pnpm build --watch"
+  },
+  "dependencies": {
+    "@xiaohuohumax/x-fetch-endpoint": "workspace:^",
+    "@xiaohuohumax/x-fetch-error": "workspace:^",
+    "@xiaohuohumax/x-fetch-types": "workspace:^",
+    "@xiaohuohumax/x-fetch-utils": "workspace:^",
+    "before-after-hook": "^3.0.2",
+    "fast-content-type-parse": "^2.0.0",
+    "is-plain-object": "^5.0.0"
+  }
+}

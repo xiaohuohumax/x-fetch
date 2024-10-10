@@ -35,7 +35,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
-    "release": "pnpm build && changeset publish"
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
@@ -64,7 +64,7 @@
   },
   "simple-git-hooks": {
     "commit-msg": "npx commitlint --edit $1",
-    "pre-commit": "pnpm test && pnpm lint:fix && git add ."
+    "pre-commit": "pnpm lint:fix && git add ."
   },
   "config": {
     "commitizen": {

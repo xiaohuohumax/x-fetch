@@ -11,12 +11,12 @@ describe("test utils module", () => {
     })
 
     expect(
-      parseUriTemplate("https://example.com/users", { names: ["xiaohuohumax", "name2"] }),
-    ).toEqual("https://example.com/users?names=xiaohuohumax&names=name2")
+      parseUriTemplate("http://example.com/users", { names: ["xiaohuohumax", "name2"] }),
+    ).toEqual("http://example.com/users?names=xiaohuohumax&names=name2")
 
     expect(
-      parseUriTemplate("https://example.com/users", { name: "xiaohuohumax" }),
-    ).toEqual("https://example.com/users?name=xiaohuohumax")
+      parseUriTemplate("http://example.com/users", { name: "xiaohuohumax" }),
+    ).toEqual("http://example.com/users?name=xiaohuohumax")
   })
 
   it("test util getUriTemplateVariableNames", async () => {
@@ -27,7 +27,7 @@ describe("test utils module", () => {
     })
 
     expect(
-      getUriTemplateVariableNames("https://example.com/"),
+      getUriTemplateVariableNames("http://example.com/"),
     ).toEqual(new Set([]))
   })
 

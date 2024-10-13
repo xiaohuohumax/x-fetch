@@ -1,14 +1,18 @@
 import type { XFetchResponse } from "@/types/dist"
 import { XFetch } from "@/core/src/index"
 import { retryPlugin } from "@/plugins/plugin-retry/src/index"
-import { describe, expect, it, vi } from "vitest"
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest"
+import { worker } from "./mock"
+
+beforeAll(() => worker.listen())
+afterAll(() => worker.close())
 
 describe("test plugin-retry module", () => {
   const NewXFetch = XFetch.plugin(retryPlugin)
 
   it("test plugin-retry hook", { timeout: 5000 }, async () => {
     const xfetch = new NewXFetch({
-      baseUrl: "https://example.com",
+      baseUrl: "http://example.com",
       retry: {
         enabled: true,
         retries: 1,
@@ -19,12 +23,9 @@ describe("test plugin-retry module", () => {
     xfetch.request.hook.before("retry", retryFunc)
 
     await xfetch.request({
-      url: "/error/{status}",
+      url: "/error/500",
       request: {
         throwResponseError: false,
-      },
-      params: {
-        status: 500,
       },
     }).catch(() => "")
 
@@ -35,7 +36,7 @@ describe("test plugin-retry module", () => {
     const abortController = new AbortController()
 
     const xfetch = new NewXFetch({
-      baseUrl: "https://example.com",
+      baseUrl: "http://example.com",
       retry: {
         enabled: true,
         retries: 1,
@@ -55,7 +56,7 @@ describe("test plugin-retry module", () => {
 
   it("test plugin-retry abort", { timeout: 5000 }, async () => {
     const xfetch = new NewXFetch({
-      baseUrl: "https://example.com",
+      baseUrl: "http://example.com",
       retry: {
         enabled: true,
         retries: 1,
@@ -74,7 +75,7 @@ describe("test plugin-retry module", () => {
 
   it("test plugin-retry throwResponseError", { timeout: 5000 }, async () => {
     const xfetch = new NewXFetch({
-      baseUrl: "https://example.com",
+      baseUrl: "http://example.com",
       request: {
         throwResponseError: true,
       },
@@ -89,7 +90,7 @@ describe("test plugin-retry module", () => {
 
   it("test plugin-retry doNotRetry", { timeout: 5000 }, async () => {
     const xfetch = new NewXFetch({
-      baseUrl: "https://example.com",
+      baseUrl: "http://example.com",
       retry: {
         enabled: true,
         retries: 1,
@@ -109,7 +110,7 @@ describe("test plugin-retry module", () => {
 
   it("test plugin-retry override", { timeout: 5000 }, async () => {
     const xfetch = new NewXFetch({
-      baseUrl: "https://example.com",
+      baseUrl: "http://example.com",
       retry: {
         enabled: true,
         retries: 1,

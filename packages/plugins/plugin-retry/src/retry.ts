@@ -21,10 +21,15 @@ export function retryPlugin(xFetch: XFetch, options: RetryPluginOptions): RetryP
       return await request(options)
     }
 
+    let retryCount = 0
+
     return await promiseRetry(async (retry, _number) => {
+      retryCount++
       let response: XFetchResponse<any>
       try {
-        response = await xFetch.request.hook("retry", request, options)
+        response = await (retryCount === 1
+          ? request(options)
+          : xFetch.request.hook("retry", request, options))
       }
       catch (error) {
         if (error instanceof Error && (error.name === "AbortError" || error instanceof XFetchTimeoutError)) {

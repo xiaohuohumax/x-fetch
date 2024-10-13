@@ -10,6 +10,30 @@ afterAll(() => worker.close())
 describe("test plugin-retry module", () => {
   const NewXFetch = XFetch.plugin(retryPlugin)
 
+  it("test plugin-retry disabled", { timeout: 5000 }, async () => {
+    const xfetch = new NewXFetch({
+      baseUrl: "http://example.com",
+      retry: {
+        enabled: false,
+      },
+    })
+    const retryFunc = vi.fn()
+    const requestFunc = vi.fn()
+
+    xfetch.request.hook.before("retry", retryFunc)
+    xfetch.request.hook.before("request", requestFunc)
+
+    await xfetch.request({
+      url: "/error/500",
+      request: {
+        throwResponseError: false,
+      },
+    }).catch(() => "")
+
+    expect(retryFunc).toHaveBeenCalledTimes(0)
+    expect(requestFunc).toHaveBeenCalledTimes(1)
+  })
+
   it("test plugin-retry hook", { timeout: 5000 }, async () => {
     const xfetch = new NewXFetch({
       baseUrl: "http://example.com",
@@ -29,7 +53,53 @@ describe("test plugin-retry module", () => {
       },
     }).catch(() => "")
 
-    expect(retryFunc).toHaveBeenCalledTimes(2)
+    expect(retryFunc).toHaveBeenCalledTimes(1)
+  })
+
+  it("test plugin-retry retries", { timeout: 5000 }, async () => {
+    const xfetch = new NewXFetch({
+      baseUrl: "http://example.com",
+      retry: {
+        enabled: true,
+        retries: 1,
+      },
+    })
+    const retry500Func = vi.fn()
+    const retry501Func = vi.fn()
+
+    xfetch.request.hook.before("retry", (options) => {
+      if (options.url.includes("500")) {
+        retry500Func()
+      }
+      else if (options.url.includes("501")) {
+        retry501Func()
+      }
+    })
+
+    const req500 = xfetch.request({
+      url: "/error/500",
+      request: {
+        throwResponseError: false,
+      },
+      retry: {
+        retries: 1,
+      },
+    }).catch(() => "")
+
+    const req501 = xfetch.request({
+      url: "/error/501",
+      request: {
+        throwResponseError: false,
+      },
+      retry: {
+        retries: 2,
+      },
+    }).catch(() => "")
+
+    await Promise.all([req500, req501])
+
+    expect(retry500Func).toHaveBeenCalledTimes(1)
+    expect(retry501Func).toHaveBeenCalledTimes(2)
   })
 
   it("test plugin-retry timeout", { timeout: 5000 }, async () => {

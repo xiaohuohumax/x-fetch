@@ -7,4 +7,7 @@ export type XFetchResponseType = "json"
   | "text"
   | "blob"
   | "stream"
+  | "formData"
+  // TODO: 大版本升级时，arraybuffer将被舍弃
   | "arraybuffer"
+  | "arrayBuffer"

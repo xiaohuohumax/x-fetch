@@ -165,13 +165,16 @@ async function parseResponse(pOptions: ParseResponseOptions): Promise<XFetchResp
  * @returns parsed response body
  */
 async function parseResponseBody(response: Response, options: RequestOptions): Promise<any> {
-  let responseType: XFetchResponseType = "arraybuffer"
+  let responseType: XFetchResponseType = "arrayBuffer"
 
   const contentType = response.headers.get("content-type")
   if (contentType) {
     const mimeType = safeParse(contentType)
     if (mimeType.type === "application/json") {
       responseType = "json"
+    }
+    else if (mimeType.type === "multipart/form-data") {
+      responseType = "formData"
     }
     else if (mimeType.type.startsWith("text/")) {
       responseType = "text"
@@ -198,7 +201,11 @@ async function parseResponseBody(response: Response, options: RequestOptions): P
     case "stream": {
       return response.body
     }
+    case "formData": {
+      return await response.formData().catch(() => new FormData())
+    }
     case "arraybuffer":
+    case "arrayBuffer":
     default: {
       return await response.arrayBuffer().catch(() => new ArrayBuffer(0))
     }

@@ -31,14 +31,16 @@ export interface RequestRequestOptions {
   /**
    * response type.
    *
-   * [`json`, `text`, `blob`, `stream`, `arraybuffer`]
+   * [`json`, `text`, `blob`, `stream`, `arrayBuffer`, `formData`]
+   *
+   * **warning**: `arraybuffer` are deprecated, use `arrayBuffer` instead.
    *
    * if set, response data will be parsed according to response type.
    * if not set, request body will be parsed automatically according to request content-type.
    * @see {@link autoParseRequestBody}
    *
    *
-   * @default undefined 'arraybuffer'
+   * @default undefined 'arrayBuffer'
    */
   responseType?: XFetchResponseType
   /**

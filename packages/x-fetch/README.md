@@ -407,7 +407,8 @@ xFetch.request.hook.wrap("parse-options", (oldFunc, options) => {
 + `text`：响应体会以文本形式返回，即 `fetch().text()`
 + `blob`：响应体会以二进制 Blob 形式返回，即 `fetch().blob()`
 + `stream`：响应体会以 fetch(ReadableStream) 流形式返回，即 `fetch().body`
-+ `arraybuffer`：响应体会以 ArrayBuffer 形式返回，即 `fetch().arrayBuffer()`
++ `formData`：响应体会以 FormData 形式返回，即 `fetch().formData()`
++ `arrayBuffer`：响应体会以 ArrayBuffer 形式返回，即 `fetch().arrayBuffer()`
 
 ```typescript
 import { XFetch } from "@xiaohuohumax/x-fetch"
@@ -424,7 +425,7 @@ const { status, data } = await xFetch.request({/** request options */ })
 const { status, data } = await xFetch.request({
   /** request options */
   request: {
-    // [`json` | `text` | `blob` | `stream` | `arraybuffer`]
+    // [`json` | `text` | `blob` | `stream` | `arrayBuffer` | `formData`]
     // 默认为 undefined arraybuffer
     responseType: "text",
   }

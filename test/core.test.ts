@@ -76,12 +76,9 @@ describe("test core module", () => {
       baseUrl: "http://example.com",
     })
     await xfetch.request({
-      url: "/error/{status}",
+      url: "/error/404",
       request: {
         throwResponseError: true,
-      },
-      params: {
-        status: 404,
       },
     }).catch(error => expect(error).toBeInstanceOf(XFetchRequestError))
 

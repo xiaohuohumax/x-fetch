@@ -54,6 +54,15 @@ export const worker = setupServer(
     }))
   }),
 
+  http.get("http://example.com/fromdata", async () => {
+    return new HttpResponse(new FormData(), {
+      status: 200,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+  }),
+
   http.get("http://example.com/error/:status", async ({ params }) => {
     return new HttpResponse(null, {
       status: Number.parseInt(params.status as string),

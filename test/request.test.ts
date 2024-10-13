@@ -319,9 +319,15 @@ describe("test request module", () => {
         name: "xiaohuohumax",
       },
       request: {
-        responseType: "arraybuffer",
+        responseType: "arrayBuffer",
       },
     })).data).to.be.instanceOf(ArrayBuffer)
+    expect((await request({
+      url: "http://example.com/fromdata",
+      request: {
+        // responseType: "formData",
+      },
+    })).data).to.be.instanceOf(FormData)
     expect((await request({
       url: "http://example.com/reply",
       method: "POST",

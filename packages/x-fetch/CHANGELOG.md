@@ -1,5 +1,12 @@
 # @xiaohuohumax/x-fetch
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`e4c85be`](https://github.com/xiaohuohumax/x-fetch/commit/e4c85be124fe30b71bb24b2218bbb021314bba6f)]:
+  - @xiaohuohumax/x-fetch-plugin-retry@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes

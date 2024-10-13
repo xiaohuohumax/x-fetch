@@ -1,7 +1,7 @@
 {
   "name": "@xiaohuohumax/x-fetch-plugin-retry",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "x-fetch plugin retry package",
   "author": {
     "name": "xiaohuohumax",

@@ -1,5 +1,11 @@
 # @xiaohuohumax/x-fetch-plugin-retry
 
+## 0.0.2
+
+### Patch Changes
+
+- [`e4c85be`](https://github.com/xiaohuohumax/x-fetch/commit/e4c85be124fe30b71bb24b2218bbb021314bba6f) Thanks [@xiaohuohumax](https://github.com/xiaohuohumax)! - 修复 retry 插件首次请求就触发 retry 钩子异常
+
 ## 0.0.1
 
 ### Patch Changes

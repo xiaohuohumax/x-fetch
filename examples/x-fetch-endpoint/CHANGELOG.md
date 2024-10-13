@@ -1,5 +1,12 @@
 # @xiaohuohumax/example-x-fetch-endpoint
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @xiaohuohumax/x-fetch-endpoint@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes

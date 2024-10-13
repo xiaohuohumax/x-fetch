@@ -1,5 +1,15 @@
 # @xiaohuohumax/x-fetch-plugin-retry
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`8c44bca`](https://github.com/xiaohuohumax/x-fetch/commit/8c44bca2e13f57314f9e8eaf7b77774d5a71cd21)]:
+  - @xiaohuohumax/x-fetch-request@0.1.0
+  - @xiaohuohumax/x-fetch-types@0.1.0
+  - @xiaohuohumax/x-fetch-core@0.1.0
+  - @xiaohuohumax/x-fetch-error@0.0.2
+
 ## 0.0.2
 
 ### Patch Changes

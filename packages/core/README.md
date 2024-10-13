@@ -1,9 +1,13 @@
 # x-fetch-core
 
+[![Version](https://img.shields.io/npm/v/@xiaohuohumax/x-fetch-core.svg?sanitize=true)](https://www.npmjs.com/package/@xiaohuohumax/x-fetch-core)
+[![License](https://img.shields.io/npm/l/@xiaohuohumax/x-fetch-core.svg?sanitize=true)](https://www.npmjs.com/package/@xiaohuohumax/x-fetch-core)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/xiaohuohumax/x-fetch/release-publish.yaml)](https://github.com/xiaohuohumax/x-fetch/actions/workflows/release-publish.yaml)
+
 一个基于 fetch API 的简单、轻量级的 HTTP 请求库。
 
 > [!NOTE]
-> 此项目由 [octokit - core.js](https://github.com/octokit/core.js) [[MIT](../../licenses/octokit.js/LICENSE)] 项目修改而来，移除了对 Github API 相关的支持, 只保留了通用的 fetch 功能。
+> 此项目由 [octokit - core.js](https://github.com/octokit/core.js) [[MIT](https://github.com/xiaohuohumax/x-fetch/blob/main/licenses/octokit.js/LICENSE)] 项目修改而来，移除了对 Github API 相关的支持, 只保留了通用的 fetch 功能。
 
 ## 🚀 快速开始
 
@@ -451,7 +455,7 @@ xFetch.request({/** request options */})
 
 ## 📦 制作插件
 
-[参考插件模板](../plugins/plugin-template/README.md)
+[参考插件模板](https://github.com/xiaohuohumax/x-fetch/tree/main/packages/plugins/plugin-template#readme)
 
 ```shell
 npm install @xiaohuohumax/x-fetch-request

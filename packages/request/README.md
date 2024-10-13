@@ -1,9 +1,13 @@
 # x-fetch-request
 
+[![Version](https://img.shields.io/npm/v/@xiaohuohumax/x-fetch-request.svg?sanitize=true)](https://www.npmjs.com/package/@xiaohuohumax/x-fetch-request)
+[![License](https://img.shields.io/npm/l/@xiaohuohumax/x-fetch-request.svg?sanitize=true)](https://www.npmjs.com/package/@xiaohuohumax/x-fetch-request)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/xiaohuohumax/x-fetch/release-publish.yaml)](https://github.com/xiaohuohumax/x-fetch/actions/workflows/release-publish.yaml)
+
 一个基于 fetch API 的简单、轻量级的 HTTP 请求库。
 
 > [!NOTE]
-> 此项目由 [octokit - request.js](https://github.com/octokit/request.js) [[MIT](../../licenses/octokit.js/LICENSE)] 项目修改而来，移除了对 Github API 相关的支持, 只保留了通用的 fetch 功能。
+> 此项目由 [octokit - request.js](https://github.com/octokit/request.js) [[MIT](https://github.com/xiaohuohumax/x-fetch/blob/main/licenses/octokit.js/LICENSE)] 项目修改而来，移除了对 Github API 相关的支持, 只保留了通用的 fetch 功能。
 
 ## 🚀 快速开始
 

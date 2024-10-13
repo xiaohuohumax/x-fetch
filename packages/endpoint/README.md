@@ -1,9 +1,13 @@
 # x-fetch-endpoint
 
+[![Version](https://img.shields.io/npm/v/@xiaohuohumax/x-fetch-endpoint.svg?sanitize=true)](https://www.npmjs.com/package/@xiaohuohumax/x-fetch-endpoint)
+[![License](https://img.shields.io/npm/l/@xiaohuohumax/x-fetch-endpoint.svg?sanitize=true)](https://www.npmjs.com/package/@xiaohuohumax/x-fetch-endpoint)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/xiaohuohumax/x-fetch/release-publish.yaml)](https://github.com/xiaohuohumax/x-fetch/actions/workflows/release-publish.yaml)
+
 一个简单、轻量级 HTTP 请求参数处理工具。
 
 > [!NOTE]
-> 此项目由 [octokit - endpoint.js](https://github.com/octokit/endpoint.js) [[MIT](../../licenses/octokit.js/LICENSE)] 项目修改而来。
+> 此项目由 [octokit - endpoint.js](https://github.com/octokit/endpoint.js) [[MIT](https://github.com/xiaohuohumax/x-fetch/blob/main/licenses/octokit.js/LICENSE)] 项目修改而来。
 
 ## 🚀 快速开始
 

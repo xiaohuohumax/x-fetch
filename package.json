@@ -35,7 +35,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
-    "release": "changeset publish"
+    "release": "pnpm build && pnpm test && changeset publish"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
@@ -48,7 +48,6 @@
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@types/node": "^22.7.4",
     "@vitest/coverage-v8": "2.1.2",
-    "clone-deep": "^4.0.1",
     "commitizen": "^4.3.0",
     "cz-git": "^1.9.1",
     "eslint": "^9.11.1",

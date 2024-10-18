@@ -1,4 +1,5 @@
 export * from "./get-uri-template-variable-names"
+export * from "./merge-signals"
 export * from "./meta"
 export * from "./object-lowercase-keys"
 export * from "./omit"

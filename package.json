@@ -22,7 +22,7 @@
     "http request"
   ],
   "scripts": {
-    "dev": "pnpm -r --filter=./apps/** --stream run dev",
+    "dev": "pnpm -r --filter=./examples/** --stream run dev",
     "build": "pnpm -r --filter=./packages/** --stream run build",
     "build:watch": "pnpm build && pnpm -r --filter=./packages/** --parallel --stream run build:watch",
     "commit": "git add . && cz",

@@ -1,4 +1,4 @@
-import { request } from "@/request/src/index"
+import { request, XFetchTimeoutError } from "@/request/src/index"
 // import { ProxyAgent, fetch as undiciFetch } from 'undici'
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest"
 import { worker } from "./mock"
@@ -39,6 +39,46 @@ describe("test request module", () => {
       },
     }).then(() => "success").catch(() => "timeout")
     expect(res2).toBe("success")
+  })
+
+  it("test timeout > signal", async () => {
+    const abortController = new AbortController()
+    setTimeout(() => abortController.abort(), 10)
+    const res = await request({
+      url: "http://example.com/timeout",
+      request: {
+        timeout: 200,
+        signal: abortController.signal,
+      },
+    }).catch((error) => {
+      if (error.name === "AbortError") {
+        return "abort"
+      }
+      else if (error instanceof XFetchTimeoutError) {
+        return "timeout"
+      }
+    })
+    expect(res).toBe("abort")
+  })
+
+  it("test timeout < signal", async () => {
+    const abortController = new AbortController()
+    setTimeout(() => abortController.abort(), 200)
+    const res = await request({
+      url: "http://example.com/timeout",
+      request: {
+        timeout: 10,
+        signal: abortController.signal,
+      },
+    }).catch((error) => {
+      if (error.name === "AbortError") {
+        return "abort"
+      }
+      else if (error instanceof XFetchTimeoutError) {
+        return "timeout"
+      }
+    })
+    expect(res).toBe("timeout")
   })
 
   it("test request body type by content-type", async () => {
@@ -320,6 +360,16 @@ describe("test request module", () => {
       },
       request: {
         responseType: "arrayBuffer",
+      },
+    })).data).to.be.instanceOf(ArrayBuffer)
+    expect((await request({
+      url: "http://example.com/reply",
+      method: "POST",
+      body: {
+        name: "xiaohuohumax",
+      },
+      request: {
+        responseType: "arraybuffer",
       },
     })).data).to.be.instanceOf(ArrayBuffer)
     expect((await request({

@@ -3,7 +3,7 @@ import type { RequestOptions, XFetchResponse, XFetchResponseType } from "@xiaohu
 import type { HookCollection } from "before-after-hook"
 import type { ParseErrorOptions, ParseResponseOptions, RequestHooks } from "./types"
 import { XFetchError, XFetchRequestError, XFetchTimeoutError } from "@xiaohuohumax/x-fetch-error"
-import { omit } from "@xiaohuohumax/x-fetch-utils"
+import { mergeSignals, omit } from "@xiaohuohumax/x-fetch-utils"
 import { safeParse } from "fast-content-type-parse"
 import { isPlainObject } from "is-plain-object"
 
@@ -229,22 +229,25 @@ export async function fetchWrapper(hook: HookCollection<RequestHooks>, options: 
   const hasTimeout = typeof timeout === "number"
 
   try {
-    const fetchPromise = () => fetch(options.url, fetchOptions)
+    const signals = []
 
     if (hasTimeout) {
-      const timeoutPromise = () => new Promise<Response>((_, reject) => {
-        timeoutId = setTimeout(() => reject(
-          new XFetchTimeoutError("Request Timeout", {
-            request: options,
-          }),
-        ), Math.max(timeout || 0, 0))
-      })
+      const timeoutAbortController = new AbortController()
+      signals.push(timeoutAbortController.signal)
 
-      fetchResponse = await Promise.race([fetchPromise(), timeoutPromise()])
+      timeoutId = setTimeout(() => timeoutAbortController.abort(
+        new XFetchTimeoutError("Request Timeout", {
+          request: options,
+        }),
+      ), Math.max(timeout || 0, 0))
     }
-    else {
-      fetchResponse = await fetchPromise()
+
+    if (fetchOptions?.signal) {
+      signals.push(fetchOptions.signal)
     }
+
+    fetchOptions.signal = mergeSignals(signals)
+    fetchResponse = await fetch(options.url, fetchOptions)
   }
   catch (error) {
     throw await hook("parse-error", parseError, { error: error as Error, options })

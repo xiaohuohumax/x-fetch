@@ -156,8 +156,8 @@ newRequest("GET /repos/{owner}/{repo}/issues{?page,per_page}", {
 
 // 用户未设置模板规则，那么额外的参数会使用默认规则
 // 规则如下：
-// 数组：hobby => {hobby*} => hobby=1&hobby=2&hobby=3
-// 非数组：name => {name} => name=value
+// 1. 数组：hobby => {hobby*} => hobby=1&hobby=2&hobby=3
+// 2. 非数组：name => {name} => name=value
 // 结果如下：
 // GET /users?hobby=1&hobby=2&hobby=3
 newRequest("GET /users", {
@@ -337,12 +337,12 @@ newRequest.hook.wrap("parse-options", (oldFunc, options) => {
 
 `responseType`（响应体处理格式） 支持类型：
 
-+ `json`：默认值，响应体会自动解析为 JSON 对象，即 `fetch().json()`
++ `json`：响应体会自动解析为 JSON 对象，即 `fetch().json()`
 + `text`：响应体会以文本形式返回，即 `fetch().text()`
 + `blob`：响应体会以二进制 Blob 形式返回，即 `fetch().blob()`
 + `stream`：响应体会以 fetch(ReadableStream) 流形式返回，即 `fetch().body`
 + `formData`：响应体会以 FormData 形式返回，即 `fetch().formData()`
-+ `arrayBuffer`：响应体会以 ArrayBuffer 形式返回，即 `fetch().arrayBuffer()`
++ `arrayBuffer`：默认值，响应体会以 ArrayBuffer 形式返回，即 `fetch().arrayBuffer()`
 
 ```typescript
 import { request } from "@xiaohuohumax/x-fetch-request"

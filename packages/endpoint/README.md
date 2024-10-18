@@ -94,8 +94,8 @@ console.log(e1.url) // /repos/octokit/request.js/issues?page=1&per_page=1
 
 // 用户未设置模板规则，那么额外的参数会使用默认规则
 // 规则如下：
-// 数组：hobby => {hobby*} => hobby=1&hobby=2&hobby=3
-// 非数组：name => {name} => name=value
+// 1. 数组：hobby => {hobby*} => hobby=1&hobby=2&hobby=3
+// 2. 非数组：name => {name} => name=value
 const e2 = endpoint("GET /users", {
   params: {
     hobby: [1, 2, 3],

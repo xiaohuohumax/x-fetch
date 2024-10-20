@@ -1,5 +1,12 @@
 # example-vue
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`3e94e03`](https://github.com/xiaohuohumax/x-fetch/commit/3e94e0399d7cdda16eaeeca6c8efc488dd5d350b)]:
+  - @xiaohuohumax/x-fetch@0.2.0
+
 ## 0.0.3
 
 ### Patch Changes

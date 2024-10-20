@@ -7,6 +7,19 @@ import { mergeSignals, omit } from "@xiaohuohumax/x-fetch-utils"
 import { safeParse } from "fast-content-type-parse"
 import { isPlainObject } from "is-plain-object"
 
+export function isJSONSerializable(object: any): boolean {
+  if (object === undefined) {
+    return false
+  }
+  const t = typeof object
+  return t === "string"
+    || t === "number"
+    || t === "boolean"
+    || object === null
+    || Array.isArray(object)
+    || isPlainObject(object)
+}
+
 /**
  * Parse request options to fetch options.
  * @param options request options
@@ -26,25 +39,31 @@ async function parseOptions(options: RequestOptions): Promise<RequestInit> {
     }
   }
 
-  // auto set content-type and accept
-  if (!headers.has("content-type")) {
-    headers.append("content-type", "application/json")
-  }
-  if (!headers.has("accept")) {
-    headers.append("accept", "application/json")
-  }
-
   let body = options.body
+
+  // auto set content-type and accept
+  if (
+    (["POST", "PUT", "PATCH", "DELETE"].includes(options.method))
+    && isJSONSerializable(body)
+    && options.request?.autoSetDefaultHeaders !== false
+  ) {
+    if (!headers.has("content-type")) {
+      headers.append("content-type", "application/json")
+    }
+    if (!headers.has("accept")) {
+      headers.append("accept", "application/json, text/plain, */*")
+    }
+  }
 
   const mimeType = safeParse(headers.get("content-type")!)
   if (
-    body
-    && mimeType?.type === "application/json"
+    mimeType?.type === "application/json"
+    && isJSONSerializable(body)
     && options.request?.autoParseRequestBody !== false
   ) {
-    if (typeof body !== "string" && (isPlainObject(body) || Array.isArray(body))) {
-      body = JSON.stringify(body)
-    }
+    body = typeof body === "string"
+      ? body
+      : JSON.stringify(body)
   }
 
   if (options.method === "GET" || options.method === "HEAD") {

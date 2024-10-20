@@ -21,6 +21,14 @@ export interface RequestRequestOptions {
    */
   autoParseRequestBody?: boolean
   /**
+   * auto set default headers.
+   *
+   * if true, when request headers do not contain `content-type` and `accept`, default headers will be added automatically.
+   *
+   * @default true
+   */
+  autoSetDefaultHeaders?: boolean
+  /**
    * throw response error.
    *
    * if true, throw response error when fetch response status code is in the range of 400-599.

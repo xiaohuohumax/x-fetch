@@ -291,26 +291,32 @@ xFetch.request({
 
 **发送JSON数据：**
 
-> [!WARNING]
-> 请求头未包含 `content-type` 和 `accept` 时，都会自动添加 `application/json`
-
 ```typescript
 import { XFetch } from "@xiaohuohumax/x-fetch-core"
 const xFetch = new XFetch({
   baseUrl: "https://api.github.com",
 })
 
-// 请求头包含 content-type: application/json 时，请求数据会自动序列化为 JSON 字符串
+// 当 method 为 POST, PUT, PATCH, DELETE 且 body 为可序列化对象时，则会自动添加默认的 content-type 和 accept 请求头
+// 如果需要禁用自动设置，可以设置 request.autoSetDefaultHeaders 为 false
+// 默认请求头如下：
+// content-type: application/json
+// accept: application/json, text/plain, */*
 xFetch.request({
   url: "/users/xiaohuohumax",
   method: "POST",
+  // 也可以设置请求头覆盖默认值
+  // headers: {
+  //   "content-type": "...",
+  //   "accept": "...",
+  // },
   body: {
     name: "xiaohuohumax",
   }
 }).then(console.log).catch(console.error)
 
+// 当请求头包含 content-type: application/json 时，请求数据会自动序列化为 JSON 字符串
 // 如果需要禁用自动序列化，可以设置 request.autoParseRequestBody 为 false
-// 注意：autoParseRequestBody： false 只是禁用 body 自动序列化，并不意味着不会为请求头添加 `content-type` 和 `accept`
 xFetch.request({
   url: "/users/xiaohuohumax",
   body: {
@@ -321,13 +327,13 @@ xFetch.request({
   }
 }).then(console.log).catch(console.error)
 
-// 若是 body 默认处理逻辑不满足需求，可以利用 `parse-options` 钩子的 `wrap` 方法自定义处理逻辑
+// 若是以上默认处理逻辑不满足需求，可以利用 `parse-options` 钩子的 `wrap` 方法自定义处理逻辑
 xFetch.request.hook.wrap("parse-options", (oldFunc, options) => {
   // 原来的处理逻辑
   // return oldFunc(options)
-  // 还请注意其他参数
+  // 自定义处理逻辑
   return {
-    // body: ... 自定义处理逻辑
+    // 处理结果
   }
 })
 ```

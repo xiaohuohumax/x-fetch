@@ -119,7 +119,7 @@ async function parseResponse(pOptions: ParseResponseOptions): Promise<XFetchResp
   const responseHeaders = Object.fromEntries(fetchResponse.headers.entries())
 
   const response: XFetchResponse<any> = {
-    url: fetchResponse.url,
+    url: options.url,
     status,
     statusText: fetchResponse.statusText,
     headers: responseHeaders,

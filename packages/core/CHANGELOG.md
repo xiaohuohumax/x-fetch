@@ -1,5 +1,18 @@
 # @xiaohuohumax/x-fetch-core
 
+## 0.2.0
+
+### Minor Changes
+
+- [`3e94e03`](https://github.com/xiaohuohumax/x-fetch/commit/3e94e0399d7cdda16eaeeca6c8efc488dd5d350b) Thanks [@xiaohuohumax](https://github.com/xiaohuohumax)! - 1. readme 更新 2. timeout 与 signal 能够同时使用 3. 修复响应体 url 获取错误 4. 请求头自动添加默认值添加开关配置 autoSetDefaultHeaders
+
+### Patch Changes
+
+- Updated dependencies [[`3e94e03`](https://github.com/xiaohuohumax/x-fetch/commit/3e94e0399d7cdda16eaeeca6c8efc488dd5d350b)]:
+  - @xiaohuohumax/x-fetch-request@0.2.0
+  - @xiaohuohumax/x-fetch-types@0.2.0
+  - @xiaohuohumax/x-fetch-error@0.0.3
+
 ## 0.1.0
 
 ### Minor Changes

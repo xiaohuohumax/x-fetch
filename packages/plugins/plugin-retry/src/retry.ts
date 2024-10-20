@@ -12,44 +12,46 @@ import { DEFAULTS } from "./defaults"
  * @returns Retry plugin.
  */
 export function retryPlugin(xFetch: XFetch, options: RetryPluginOptions): RetryPlugin {
-  let state: Required<Retry> = Object.assign(DEFAULTS, options.retry)
+  const globalState: Required<Retry> = Object.assign({}, DEFAULTS, options.retry)
 
-  xFetch.request.hook.wrap("request", async (request, options) => {
-    state = Object.assign(state, options.retry)
+  if (globalState.enabled) {
+    xFetch.request.hook.wrap("request", async (request, options) => {
+      const state = Object.assign({}, globalState, options.retry)
 
-    if (!state.enabled) {
-      return await request(options)
-    }
-
-    let retryCount = 0
-
-    return await promiseRetry(async (retry, _number) => {
-      retryCount++
-      let response: XFetchResponse<any>
-      try {
-        response = await (retryCount === 1
-          ? request(options)
-          : xFetch.request.hook("retry", request, options))
+      if (!state.enabled) {
+        return await request(options)
       }
-      catch (error) {
-        if (error instanceof Error && (error.name === "AbortError" || error instanceof XFetchTimeoutError)) {
-          throw error
+
+      let retryCount = 0
+
+      return await promiseRetry(async (retry, _number) => {
+        retryCount++
+        let response: XFetchResponse<any>
+        try {
+          response = await (retryCount === 1
+            ? request(options)
+            : xFetch.request.hook("retry", request, options))
         }
-        return retry(error)
-      }
+        catch (error) {
+          if (error instanceof Error && (error.name === "AbortError" || error instanceof XFetchTimeoutError)) {
+            throw error
+          }
+          return retry(error)
+        }
 
-      if (!state.doNotRetry.includes(response.status) && response.status >= 400) {
-        return retry(new XFetchRequestError(response.statusText, {
-          status: response.status,
-          statusText: response.statusText,
-          request: options,
-          response,
-        }))
-      }
+        if (!state.doNotRetry.includes(response.status) && response.status >= 400) {
+          return retry(new XFetchRequestError(response.statusText, {
+            status: response.status,
+            statusText: response.statusText,
+            request: options,
+            response,
+          }))
+        }
 
-      return response
-    }, state)
-  })
+        return response
+      }, state)
+    })
+  }
 
-  return { }
+  return {}
 }

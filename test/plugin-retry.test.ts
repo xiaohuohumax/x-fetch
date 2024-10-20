@@ -28,6 +28,9 @@ describe("test plugin-retry module", () => {
       request: {
         throwResponseError: false,
       },
+      retry: {
+        enabled: true,
+      },
     }).catch(() => "")
 
     expect(retryFunc).toHaveBeenCalledTimes(0)
@@ -148,6 +151,10 @@ describe("test plugin-retry module", () => {
       baseUrl: "http://example.com",
       request: {
         throwResponseError: true,
+      },
+      retry: {
+        enabled: true,
+        retries: 1,
       },
     })
 

@@ -10,7 +10,7 @@ import { DEFAULTS } from "./defaults"
  */
 export function templatePlugin(xFetch: XFetch, options: TemplatePluginOptions): TemplatePlugin {
   // plugin options merge
-  const state: Required<Template> = Object.assign(DEFAULTS, options.template)
+  const state: Required<Template> = Object.assign({}, DEFAULTS, options.template)
   if (state.enabled) {
     // do something
   }
